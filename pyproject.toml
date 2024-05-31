@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "text-tone-service"
+version = "0.1.0"
+description = "ML service for classifying of tone text"
+authors = ["ivan golt <102701882+ivangolt@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "text_tone_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.prod.dependencies]
+transformers = "^4.41.2"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.0"
+loguru = "^0.7.2"
+celery = "^5.4.0"
+rabbitmq = "^0.2.0"
+redis = "^5.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
