@@ -23,3 +23,10 @@ class TextRequest(BaseModel):
                 "text": "Привет, как дела? Что нового?",
             }
         }
+
+
+class PredictionResult(BaseModel):
+    """Модель ответа сервиса на предсказание"""
+
+    label: str = "unknown"
+    score: float = 0.0

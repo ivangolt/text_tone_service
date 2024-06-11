@@ -6,6 +6,8 @@
 from torch import set_num_threads
 from transformers import pipeline
 
+from src.models.requests import PredictionResult
+
 set_num_threads(1)
 # устанавливаем количество потоков
 
@@ -27,4 +29,10 @@ class TextToneClassifier:
             text (str): _description_
         """
         result = cls.model(text)
-        return result
+
+        try:
+            response = dict(result[0])
+            return response
+
+        except TypeError:
+            return PredictionResult()

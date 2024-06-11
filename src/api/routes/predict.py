@@ -4,14 +4,14 @@
 
 from fastapi import APIRouter, BackgroundTasks
 
-from src.models.requests import TextRequest
+from src.models.requests import PredictionResult, TextRequest
 from src.services.model import TextToneClassifier
 from src.services.utils import print_logger_info
 
 router = APIRouter()
 
 
-@router.post("/predict/")
+@router.post("/predict/", response_model=PredictionResult, name="response")
 async def predict_text_tone(
     text_request: TextRequest, background_tasks: BackgroundTasks
 ):
@@ -23,6 +23,7 @@ async def predict_text_tone(
     """
 
     result = TextToneClassifier.predict_text_tone(text_request.text)
+
     background_tasks.add_task(
         print_logger_info,
         text_request.text,
