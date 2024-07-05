@@ -1,9 +1,36 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  emotion-classification:
+  backend:
     build:
       context: .
-      dockerfile: .docker/Dockerfile
+      dockerfile: src/Dockerfile
+    command: ["poetry run uvicorn src.app:app --host 0.0.0.0 --port 8000"]
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      - frontend
     ports:
-      - 8000:8000
+      - "8000:8000"
+    networks:
+      - app-network
+    healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8000/heathcheck/"]
+            interval: 20s
+            timeout: 10s
+            retries: 5
+    
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    command: ["poetry run streamlit run frontend/tone_app.py --server.port=8501 --server.address=0.0.0.0" ]
+    ports:
+      - "8501:8501"
+    networks:
+      - app-network
+    
+networks:
+  app-network:
+    driver: bridge

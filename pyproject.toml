@@ -15,10 +15,11 @@ transformers = "^4.41.2"
 fastapi = "^0.111.0"
 uvicorn = "^0.30.0"
 loguru = "^0.7.2"
-celery = "^5.4.0"
-rabbitmq = "^0.2.0"
-redis = "^5.0.4"
 torch = "^2.3.0"
+
+
+[tool.poetry.group.frontend.dependencies]
+streamlit = "^1.36.0"
 
 [build-system]
 requires = ["poetry-core"]
