@@ -1,4 +1,4 @@
-# Model Service Api
+# Model Service Api with Streamlit frontend
 
 Example The ML service is a web application that provides an API for interacting with a machine learning model. It allows users to send queries with prediction data and get results back.
 
@@ -8,8 +8,13 @@ When launched, the application initializes FastAPI, which handles HTTP requests.
 
 ```
 .
-├── .docker
-│   └── Dockerfile              # Docker image with app
+├── Docker
+│   └── frontend
+|        └── Dockerfile         # Docker image for frontend app
+|   └── backend
+|         └── Dockerfile        # Docker image for backend app
+├── frontend
+|      └── tone_app.py          # Streamlit app file for frontend part of app   
 ├── docker-compose.yml          # Docker container managing
 ├── pyproject.toml              # Dependencies
 └── src
@@ -43,6 +48,10 @@ UI on
 
 `http://localhost:8000/docs`
 
+App on 
+
+`http://localhost:8501`
+
 
 ## Running local
 
@@ -51,3 +60,12 @@ UI on
 `poetry install --no-dev`
 
 `poetry run uvicorn src.app:app --host localhost --port 8000`
+
+and
+
+`poetry run streamlit run frontend/tone_app.py`
+
+
+# Example of work
+
+![](docs/streamlit_service.png)
